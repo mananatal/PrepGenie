@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { mockInterview } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
 import moment from 'moment'
+import { useRouter } from 'next/navigation'
 
 function AddNewInterview() {
     const [loading,setLoading]=useState(false);
@@ -26,6 +27,8 @@ function AddNewInterview() {
     const [jobDesc,setJobDesc]=useState("");
     const [jobExperience,setJobExperience]=useState(0);
     const [jsonResponse,setJsonResponse]=useState([]);
+
+    const router=useRouter();
 
     const {user}= useUser();
 
@@ -46,8 +49,6 @@ function AddNewInterview() {
             }
             setJsonResponse(jsonRes);
 
-            
-
             const res=await db.insert(mockInterview).values({
                 mockId: uuidv4(),
                 jsonMockResp: jsonRes,
@@ -57,6 +58,10 @@ function AddNewInterview() {
                 createdBy: user?.primaryEmailAddress?.emailAddress,
                 createdAt: moment().format('DD-MM-YYYY'),
             }).returning({mockId:mockInterview.mockId});
+
+            if(res){
+                router.push(`/dashboard/interview/${res[0].mockId}`)
+            }
 
 
         } catch (error) {
