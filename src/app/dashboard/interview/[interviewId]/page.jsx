@@ -61,7 +61,7 @@ function InterviewPage({params}) {
             <Webcam
                 onUserMedia={() => setWebcamEnabled(true)}
                 onUserMediaError={(e) => {console.log(e); setWebcamEnabled(false)}}
-                mirrored={true}
+                mirrored={true  }
                 style={{ height: 300, width: 300 }}
             />
             ) : (

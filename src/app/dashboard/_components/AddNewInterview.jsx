@@ -41,7 +41,16 @@ function AddNewInterview() {
             {
                 "question": "Your question here",
                 "answer": "Your answer here"
-            }`;
+            }
+             consider this as sample:
+             [
+                {
+                    "question":"some question",
+                    "answer":"Answer for that question"
+                }
+             ]
+                give interview questions like this     
+            `;
             const result=await chatSession.sendMessage(prompt);
             const jsonRes=(result?.response?.text()).replace('```json','').replace('```','');
             if(!jsonRes){
