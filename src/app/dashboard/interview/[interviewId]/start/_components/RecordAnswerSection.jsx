@@ -60,7 +60,6 @@ function RecordAnswerSection({activeQuestionIndex,interviewQuestions,interviewDa
             const result=await chatSession.sendMessage(prompt);
             const resp=result.response.text().replace("```json", "").replace("```", "");
             const jsonFeedbackAndrRating=JSON.parse(resp);
-            console.log(jsonFeedbackAndrRating);
     
             const insertedUserResponse=await db.insert(userAnswer).values({
                 mockIdRef:interviewData.mockId,

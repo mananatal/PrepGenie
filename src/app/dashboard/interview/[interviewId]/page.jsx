@@ -25,7 +25,7 @@ function InterviewPage({params}) {
     },[])
     
   
-    // http://localhost:3000/dashboard/interview/5ec629ad-fbd9-435b-8840-239fde6e71f1
+    
 
   return (
     <div className="my-10 ">

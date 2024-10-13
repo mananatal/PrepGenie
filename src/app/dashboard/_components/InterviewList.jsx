@@ -41,11 +41,18 @@ function InterviewList() {
         )
         :
         (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-3">
-            {interviewList&&interviewList.map((interview,index)=>(
-                <InterviewItemCard interview={interview} key={index}/>
-            ))}
-          </div>
+            interviewList.length==0?
+            (
+              <p className='my-2 text-sm'>You don't have any interview yet.</p>
+            )
+            :
+            (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-3">
+                {interviewList&&interviewList.map((interview,index)=>(
+                    <InterviewItemCard interview={interview} key={index}/>
+                ))}
+              </div>
+            )
         )
       }
       
