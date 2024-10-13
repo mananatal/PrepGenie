@@ -8,8 +8,6 @@ import { NextResponse } from 'next/server';
 
 export default clerkMiddleware((auth, req) => {
   const {userId}=auth();
-  console.log("Printitng UserId: "+userId)
-  console.log("Hello from middleware")
   const currentUrl=new URL(req.url);
   const isDashboard=currentUrl.pathname.startsWith('/dashboard');
 
