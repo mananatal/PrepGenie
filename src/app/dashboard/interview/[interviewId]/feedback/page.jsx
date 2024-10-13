@@ -10,9 +10,11 @@ import { db } from '@/utils/db';
 import { userAnswer } from '@/utils/schema';
 import { desc, eq } from 'drizzle-orm';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 function FeedbackPage({params}) {
   const [feedbackList,setFeedbackList]=useState([]);
+  const router=useRouter();
 
   const getUserFeedbacks=async ()=>{
     const result=await db.select().from(userAnswer).where(eq(userAnswer.mockIdRef,params?.interviewId)).orderBy(userAnswer.id);
