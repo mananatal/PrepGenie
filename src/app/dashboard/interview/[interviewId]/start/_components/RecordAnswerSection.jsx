@@ -123,9 +123,7 @@ function RecordAnswerSection({activeQuestionIndex,interviewQuestions,interviewDa
                 </h2>
                 )}
             </Button>
-            <Button onClick={() => console.log("------", userRecordedAnswer)}>
-                Show User Answer
-            </Button>
+            
             </div>
     </div>
   )
