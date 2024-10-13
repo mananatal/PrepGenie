@@ -43,7 +43,7 @@ function InterviewList() {
         (
             interviewList.length==0?
             (
-              <p className='my-2 text-sm'>You don't have any interview yet.</p>
+              <p className='my-2 text-sm'>You don&apos;t have any interview yet.</p>
             )
             :
             (
