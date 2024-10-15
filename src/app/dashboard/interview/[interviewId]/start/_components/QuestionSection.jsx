@@ -3,7 +3,7 @@ import { Lightbulb, Volume2 } from 'lucide-react'
 import React,{useEffect} from 'react'
 
 
-function QuestionSection({activeQuestionIndex,interviewQuestions,setActiveQuestionIndex}) {
+function QuestionSection({activeQuestionIndex,interviewQuestions,setActiveQuestionIndex,visitedQuestions,setVisitedQuestions,answeredQuestion}) {
 
     function speak(text) {
         if('speechSynthesis' in window){
@@ -19,6 +19,11 @@ function QuestionSection({activeQuestionIndex,interviewQuestions,setActiveQuesti
 
         }
     }
+
+    const onVisitQuestion=(index)=>{
+        setActiveQuestionIndex(index);
+        setVisitedQuestions((prev)=>[...prev,index]);
+    }
       
    
   return (
@@ -26,8 +31,8 @@ function QuestionSection({activeQuestionIndex,interviewQuestions,setActiveQuesti
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {
                 interviewQuestions && interviewQuestions.map((question,index)=>(
-                    <h1 key={index} className={`text-xs md:text-sm border rounded-md bg-secondary cursor-pointer text-center p-2 ${index===activeQuestionIndex && '!bg-blue-700 text-white'}`}
-                        onClick={()=>setActiveQuestionIndex(index)}
+                    <h1 key={index} className={`text-xs md:text-sm border rounded-md bg-secondary cursor-pointer text-center p-2 ${index===activeQuestionIndex && '!bg-blue-700 text-white'} ${visitedQuestions.includes(index) && 'bg-purple-950 text-white'} ${answeredQuestion.includes(index) && 'bg-green-700 text-white'}`}
+                        onClick={()=>onVisitQuestion(index)}
                     >
                         Question #{index+1}
                     </h1>
@@ -44,7 +49,22 @@ function QuestionSection({activeQuestionIndex,interviewQuestions,setActiveQuesti
             onClick={()=>speak(interviewQuestions && interviewQuestions[activeQuestionIndex].question)} 
         />
 
-        <div className="bg-blue-100 text-blue-800 rounded-lg p-4 mt-20">
+        <div className='my-4'>
+            <div className='flex items-center space-x-4'>
+                <div className='h-4 w-4 rounded-full bg-green-700'></div>
+                <p>Answered Question</p>
+            </div>
+            <div className='flex items-center space-x-4'>
+                <div className='h-4 w-4 rounded-full bg-purple-900'></div>
+                <p>Visited Question</p>
+            </div>
+            <div className='flex items-center space-x-4'>
+                <div className='h-4 w-4 rounded-full bg-secondary border'></div>
+                <p>Unanswered Question</p>
+            </div>
+        </div>
+
+        <div className="bg-blue-100 text-blue-800 rounded-lg p-4 mt-8">
             <h2>
                 <strong > <Lightbulb/>Note: </strong>
                 {process.env.NEXT_PUBLIC_INTERVIEW_NOTE}

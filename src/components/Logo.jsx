@@ -13,7 +13,7 @@ const headingFont=localFont({
 
 export const Logo = () => {
   return (
-    <Link href="/">
+    <Link href="/dashboard">
       <div className="items-center justify-center hover:opacity-75 transition gap-x-2 hidden md:flex">
         <Image
           src={LogoImage}

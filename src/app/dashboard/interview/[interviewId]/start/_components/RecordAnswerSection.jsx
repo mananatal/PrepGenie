@@ -13,7 +13,7 @@ import React,{useState,useEffect} from 'react'
 import useSpeechToText from 'react-hook-speech-to-text';
 import Webcam from 'react-webcam';
 
-function RecordAnswerSection({activeQuestionIndex,interviewQuestions,interviewData}){
+function RecordAnswerSection({activeQuestionIndex,interviewQuestions,interviewData,setAnsweredQuestion,setActiveQuestionIndex}){
 
     const [loading,setLoading]=useState(false);
     const [userRecordedAnswer,setUserRecordedAnswer]=useState("");
@@ -78,6 +78,10 @@ function RecordAnswerSection({activeQuestionIndex,interviewQuestions,interviewDa
                 });
                 setUserRecordedAnswer("");
                 setResults([]);
+                setAnsweredQuestion(prev=>[...prev,activeQuestionIndex]);
+                if(activeQuestionIndex!=interviewQuestions.length-1){
+                    setActiveQuestionIndex(activeQuestionIndex+1);
+                }
             }
             setResults([]);
     

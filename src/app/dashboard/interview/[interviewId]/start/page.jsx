@@ -15,6 +15,9 @@ function InterviewStartPage({params}) {
   const [activeQuestionIndex,setActiveQuestionIndex]=useState(0);
   const [interviewQuestions,setInterviewQuestions]=useState();
 
+  const [visitedQuestions,setVisitedQuestions]=useState([0]);
+  const [answeredQuestion,setAnsweredQuestion]=useState([]);
+
   const getInterviewData=async ()=>{
     const result=await db.select().from(mockInterview).where(eq(mockInterview.mockId,params.interviewId));
     setInterviewData(result[0]);
@@ -26,7 +29,18 @@ function InterviewStartPage({params}) {
   useEffect(() => {
     getInterviewData();
   }, []);
+
   
+  const onNextPress=()=>{
+    setVisitedQuestions(prev=>[...prev,activeQuestionIndex]);
+    setActiveQuestionIndex(activeQuestionIndex+1);
+  }
+
+  const onPrevPress=()=>{
+    setVisitedQuestions(prev=>[...prev,activeQuestionIndex]);
+    setActiveQuestionIndex(activeQuestionIndex-1);
+  }
+
 
 
   return (
@@ -37,18 +51,24 @@ function InterviewStartPage({params}) {
             activeQuestionIndex={activeQuestionIndex}
             interviewQuestions={interviewQuestions}
             setActiveQuestionIndex={setActiveQuestionIndex}
+            setVisitedQuestions={setVisitedQuestions}
+            visitedQuestions={visitedQuestions}
+            answeredQuestion={answeredQuestion}
           />
           {/* record answer section */}
           <RecordAnswerSection
             activeQuestionIndex={activeQuestionIndex}
             interviewQuestions={interviewQuestions}
             interviewData={interviewData}
+            setAnsweredQuestion={setAnsweredQuestion}
+            answeredQuestion={answeredQuestion}
+            setActiveQuestionIndex={setActiveQuestionIndex}
           />
       </div>
 
       <div className="flex gap-4 my-6 justify-end">
-        {activeQuestionIndex!==0 && <Button onClick={()=>setActiveQuestionIndex(activeQuestionIndex-1)} >Previous</Button>}
-        {interviewQuestions &&  activeQuestionIndex!== interviewQuestions.length-1 &&  <Button onClick={()=>setActiveQuestionIndex(activeQuestionIndex+1)} >Next</Button>}
+        {activeQuestionIndex!==0 && <Button onClick={onPrevPress} >Previous</Button>}
+        {interviewQuestions &&  activeQuestionIndex!== interviewQuestions.length-1 &&  <Button onClick={onNextPress} >Next</Button>}
         {interviewQuestions && activeQuestionIndex===interviewQuestions.length-1 && 
           <Link href={'/dashboard/interview/'+interviewData?.mockId+'/feedback'}>
             <Button>End Interview</Button>
