@@ -47,13 +47,13 @@ function InterviewPage({params}) {
             </h2>
             </div>
             <div className="p-5 border rounded-lg border-yellow-300 bg-yellow-100">
-            <h2 className="flex gap-2 items-center text-yellow-500">
-                <Lightbulb />
-                <span>Information</span>
-            </h2>
-            <h2 className="mt-3 text-yellow-500">
-                {process.env.NEXT_PUBLIC_INTERVIEW_DESCRIPTION}
-            </h2>
+                <h2 className="flex gap-2 items-center text-yellow-500">
+                    <Lightbulb />
+                    <span>Information</span>
+                </h2>
+                <h2 className="mt-3 text-yellow-500">
+                    {process.env.NEXT_PUBLIC_INTERVIEW_DESCRIPTION}
+                </h2>
             </div>
         </div>
         <div>

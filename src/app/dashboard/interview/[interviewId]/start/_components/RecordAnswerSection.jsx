@@ -13,7 +13,7 @@ import React,{useState,useEffect} from 'react'
 import useSpeechToText from 'react-hook-speech-to-text';
 import Webcam from 'react-webcam';
 
-function RecordAnswerSection({activeQuestionIndex,interviewQuestions,interviewData,setAnsweredQuestion,setActiveQuestionIndex}){
+function RecordAnswerSection({activeQuestionIndex,interviewQuestions,interviewData,setAnsweredQuestion,setActiveQuestionIndex,answeredQuestion}){
 
     const [loading,setLoading]=useState(false);
     const [userRecordedAnswer,setUserRecordedAnswer]=useState("");
@@ -111,22 +111,33 @@ function RecordAnswerSection({activeQuestionIndex,interviewQuestions,interviewDa
                 mirrored={true}
                 />
             </div>
-            <Button
-                disabled={loading}
-                variant="outline"
-                className="my-10"
-                onClick={StartStopRecording}
-            >
-                {isRecording ? (
-                <h2 className="text-red-600 items-center animate-pulse flex gap-2">
-                    <StopCircle /> Stop Recording...
-                </h2>
-                ) : (
-                <h2 className="text-primary flex gap-2 items-center">
-                    <Mic /> Record Answer
-                </h2>
-                )}
-            </Button>
+
+            {
+                answeredQuestion.includes(activeQuestionIndex) ?
+                (
+                    <Button variant="ghost" className='font-semibold text-lg '>You have already answered this question.</Button>
+                )
+                :
+                (
+                    <Button
+                        disabled={loading}
+                        variant="outline"
+                        className="my-10"
+                        onClick={StartStopRecording}
+                    >
+                        {isRecording ? (
+                            <h2 className="text-red-600 items-center animate-pulse flex gap-2">
+                                <StopCircle /> Stop Recording...
+                            </h2>
+                            ) : (
+                            <h2 className="text-primary flex gap-2 items-center">
+                                <Mic /> Record Answer
+                            </h2>
+                        )}
+                    </Button>
+                )
+            }
+            
             
             </div>
     </div>

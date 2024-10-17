@@ -71,7 +71,7 @@ function InterviewStartPage({params}) {
         {interviewQuestions &&  activeQuestionIndex!== interviewQuestions.length-1 &&  <Button onClick={onNextPress} >Next</Button>}
         {interviewQuestions && activeQuestionIndex===interviewQuestions.length-1 && 
           <Link href={'/dashboard/interview/'+interviewData?.mockId+'/feedback'}>
-            <Button>End Interview</Button>
+            <Button variant="destructive">End Interview</Button>
           </Link>     
         }
           
