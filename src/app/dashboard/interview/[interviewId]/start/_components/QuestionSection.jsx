@@ -31,7 +31,7 @@ function QuestionSection({activeQuestionIndex,interviewQuestions,setActiveQuesti
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {
                 interviewQuestions && interviewQuestions.map((question,index)=>(
-                    <h1 key={index} className={`text-xs md:text-sm border rounded-md bg-secondary cursor-pointer text-center p-2 ${index===activeQuestionIndex && '!bg-blue-700 text-white'} ${visitedQuestions.includes(index) && 'bg-purple-950 text-white'} ${answeredQuestion.includes(index) && 'bg-green-700 text-white'}`}
+                    <h1 key={index} className={`text-xs md:text-sm border rounded-md bg-secondary cursor-pointer text-center p-2 ${index===activeQuestionIndex && '!bg-blue-700 text-white'} ${visitedQuestions.includes(index) && index!=activeQuestionIndex && '!bg-purple-950 text-white'} ${answeredQuestion.includes(index)  && index!=activeQuestionIndex && '!bg-green-700 text-white'}`}
                         onClick={()=>onVisitQuestion(index)}
                     >
                         Question #{index+1}

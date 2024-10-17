@@ -45,7 +45,7 @@ function InterviewStartPage({params}) {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
           {/* questions section */}
           <QuestionSection
             activeQuestionIndex={activeQuestionIndex}
