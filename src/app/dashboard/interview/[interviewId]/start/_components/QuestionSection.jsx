@@ -28,17 +28,24 @@ function QuestionSection({activeQuestionIndex,interviewQuestions,setActiveQuesti
    
   return (
     <div className="border p-6 rounded-lg ">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {
-                interviewQuestions && interviewQuestions.map((question,index)=>(
-                    <h1 key={index} className={`text-xs md:text-sm border rounded-md bg-secondary cursor-pointer text-center p-2 ${index===activeQuestionIndex && '!bg-blue-700 text-white'} ${answeredQuestion.includes(index)  && index!=activeQuestionIndex && '!bg-green-700 text-white'} ${visitedQuestions.includes(index) && index!=activeQuestionIndex && !answeredQuestion.includes(activeQuestionIndex) && '!bg-purple-950 text-white'} `}
-                        onClick={()=>onVisitQuestion(index)}
+                interviewQuestions && interviewQuestions.map((question, index) => (
+                    <h1 
+                        key={index} 
+                        className={`text-xs md:text-sm border rounded-md bg-secondary cursor-pointer text-center p-2
+                        ${index === activeQuestionIndex ? '!bg-blue-700 text-white' : ''}
+                        ${answeredQuestion.includes(index) && index !== activeQuestionIndex ? '!bg-green-700 text-white' : ''}
+                        ${visitedQuestions.includes(index) && !answeredQuestion.includes(index) && index !== activeQuestionIndex ? '!bg-purple-950 text-white' : ''}
+                        `}
+                        onClick={() => onVisitQuestion(index)}
                     >
-                        Question #{index+1}
+                        Question #{index + 1}
                     </h1>
                 ))
             }
         </div>
+
         <p className="mt-6 md:text-lg">
             {
                 interviewQuestions && interviewQuestions[activeQuestionIndex].question
